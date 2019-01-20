@@ -1,3 +1,15 @@
+import csv
+
+def openAnalysis(analysisFile):
+    with open(analysisFile, 'r') as fin:
+        values = {}
+        reader = csv.reader(fin)
+        role = next(reader)[0]
+        for row in reader:
+            values[row[0]] = row[1]
+
+    return AnalysisFunction(role, values)
+
 class AnalysisFunction:
     def __init__(self, role, values):
         self.values = values

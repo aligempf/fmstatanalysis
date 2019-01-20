@@ -1,3 +1,12 @@
+import csv
+
+def openStatsFile(statFile, analyses):
+    with open(statFile, 'r') as fin:
+        stats = set()
+        for row in csv.DictReader(fin):
+            stats.add(Player(row, analyses))
+    return stats
+
 class Player:
     def __init__(self, playerRow, funs):
         self.__dict__ = playerRow
