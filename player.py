@@ -20,7 +20,7 @@ class Player:
         return self.__dict__[key]
 
     def outputPlayer(self):
-        output = {"Name": self.Name, "Club": self.Club}
+        output = {"Name": self.Name, "Club": self.Club, "Position": self.Position}
         output.update(self.values.items())
         return output
 
