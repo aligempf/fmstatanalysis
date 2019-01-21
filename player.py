@@ -19,3 +19,15 @@ class Player:
     def __getitem__(self, key):
         return self.__dict__[key]
 
+    def outputPlayer(self):
+        output = {"Name": self.Name, "Club": self.Club}
+        output.update(self.values.items())
+        return output
+
+def writePlayer(players):
+    with open("target/out.csv", "w") as fout:
+        writer = csv.DictWriter(fout, list(players)[0].outputPlayer().keys())
+        writer.writeheader()
+        for player in players:
+            writer.writerow(player.outputPlayer())
+

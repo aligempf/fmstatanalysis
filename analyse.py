@@ -9,6 +9,5 @@ analyses = [openAnalysis(funFile) for funFile in funFiles]
 
 stats = player.openStatsFile(statFile, analyses)
 
-print(stats)
-print([player.values for player in stats])
+player.writePlayer(stats)
 
