@@ -19,5 +19,5 @@ class AnalysisFunction:
     def __call__(self, player):
         rating = 0
         for value in self.values:
-            rating += int(self.values[value])/self.valueSum * int(player[value])
+            rating += float(self.values[value])/self.valueSum * int(player[value])
         return rating

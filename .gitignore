@@ -107,3 +107,4 @@ stats/*
 analysisFunctions/*
 .DS_Store
 
+.idea

@@ -7,7 +7,7 @@ funFiles = sys.argv[2:]
 
 analyses = [openAnalysis(funFile) for funFile in funFiles]
 
-stats = player.openStatsFile(statFile, analyses)
+stats = player.PlayerReaderCSV(statFile)(analyses)
 
-player.writePlayer(stats)
+player.PlayerWriterCSV("target/out.csv")(stats)
 

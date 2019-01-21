@@ -1,11 +1,19 @@
 import csv
 
-def openStatsFile(statFile, analyses):
-    with open(statFile, 'r') as fin:
-        stats = set()
-        for row in csv.DictReader(fin):
-            stats.add(Player(row, analyses))
-    return stats
+class PlayerReader:
+    def __init__(self, statFile):
+        self.statFile = statFile
+
+    def __call__(self, analyses):
+        pass
+
+class PlayerReaderCSV(PlayerReader):
+    def __call__(self, analyses):
+        with open(self.statFile, 'r') as fin:
+            stats = set()
+            for row in csv.DictReader(fin):
+                stats.add(Player(row, analyses))
+        return stats
 
 class Player:
     def __init__(self, playerRow, funs):
@@ -24,10 +32,18 @@ class Player:
         output.update(self.values.items())
         return output
 
-def writePlayer(players):
-    with open("target/out.csv", "w") as fout:
-        writer = csv.DictWriter(fout, list(players)[0].outputPlayer().keys())
-        writer.writeheader()
-        for player in players:
-            writer.writerow(player.outputPlayer())
+class PlayerWriter:
+    def __init__(self, outFile):
+        self.outFile = outFile
+
+    def __call__(self, players):
+        pass
+
+class PlayerWriterCSV(PlayerWriter):
+    def __call__(self, players):
+        with open("target/out.csv", "w") as fout:
+            writer = csv.DictWriter(fout, list(players)[0].outputPlayer().keys())
+            writer.writeheader()
+            for player in players:
+                writer.writerow(player.outputPlayer())
 
