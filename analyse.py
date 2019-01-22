@@ -7,7 +7,7 @@ funFiles = sys.argv[2:]
 
 analyses = [openAnalysis(funFile) for funFile in funFiles]
 
-stats = player.PlayerReaderCSV(statFile)(None)
+stats = player.PlayerReaderRaw(statFile)(None)
 for stat in stats:
     for analysis in analyses:
         stat.apply(analysis)

@@ -38,6 +38,15 @@ class PlayerReaderCSV(PlayerReader):
                 stats.add(Player(row, analyses))
         return stats
 
+class PlayerReaderRaw(PlayerReader):
+    def __call__(self, analyses):
+        with open(self.statFile, 'r') as fin:
+            rawStats = [list(map(lambda val: val.strip(), row[1:-1])) for row in csv.reader(fin, delimiter="|") if not len(row) == 0]
+        filteredStats = list(filter(lambda val: "---" not in list(val)[0], rawStats))
+        headers = filteredStats[0]
+        filteredStats = filteredStats[1:]
+        return set([Player({headers[i]: filteredStat[i] for i in range(0, len(filteredStat))}, analyses) for filteredStat in filteredStats])
+
 class PlayerWriter:
     def __init__(self, outFile):
         self.outFile = outFile
