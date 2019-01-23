@@ -27,11 +27,11 @@ class PlayerReader:
     def __init__(self, statFile):
         self.statFile = statFile
 
-    def __call__(self, analyses):
+    def read(self, analyses):
         pass
 
 class PlayerReaderCSV(PlayerReader):
-    def __call__(self, analyses):
+    def read(self, analyses):
         with open(self.statFile, 'r') as fin:
             stats = set()
             for row in csv.DictReader(fin):
@@ -39,7 +39,7 @@ class PlayerReaderCSV(PlayerReader):
         return stats
 
 class PlayerReaderRaw(PlayerReader):
-    def __call__(self, analyses):
+    def read(self, analyses=None):
         with open(self.statFile, 'r') as fin:
             rawStats = [list(map(lambda val: val.strip(), row[1:-1])) for row in csv.reader(fin, delimiter="|") if not len(row) == 0]
         filteredStats = list(filter(lambda val: "---" not in list(val)[0], rawStats))
