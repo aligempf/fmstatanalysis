@@ -3,3 +3,7 @@ class Config:
         self.analysisFiles = analysisFiles
         self.statFile = statFile
         self.targetFile = targetFile
+
+class ConfigReader:
+    def readConfig(self):
+        pass

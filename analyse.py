@@ -1,9 +1,8 @@
-import sys
 import player
 from analysisFunction import openAnalysis
-from config import Config
+from config.ConfigReaderJson import ConfigReaderJson
 
-config = Config(sys.argv[1], sys.argv[2:], "target/out.csv")
+config = ConfigReaderJson("analysisFunctions/config.json").readConfig()
 
 statFile = config.statFile
 funFiles = config.analysisFiles
