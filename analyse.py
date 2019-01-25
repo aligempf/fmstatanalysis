@@ -1,9 +1,12 @@
 import sys
 import player
 from analysisFunction import openAnalysis
+from config import Config
 
-statFile = sys.argv[1]
-funFiles = sys.argv[2:]
+config = Config(sys.argv[1], sys.argv[2:], "target/out.csv")
+
+statFile = config.statFile
+funFiles = config.analysisFiles
 
 analyses = [openAnalysis(funFile) for funFile in funFiles]
 
